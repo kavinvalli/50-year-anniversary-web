@@ -2,39 +2,142 @@ import React from "react";
 import BackBtn from "../../../components/BackBtn";
 import Layout from "../../../components/Layout";
 // import Table from "../../../components/Table";
-import { IEvent } from "../../../lib/types";
+import { IAlumni, IEvent } from "../../../lib/types";
+import { useTable } from "react-table";
 
-const Event: React.FC<IEvent> = ({ name, venue, date, time }) => {
+interface IAlumniWithAttendance extends IAlumni {
+  pivot: {
+    event_id: number;
+    alumni_id: number;
+    attended: number;
+  };
+}
+
+interface IEventProps extends IEvent {
+  alumnis: IAlumniWithAttendance[];
+}
+
+const Event: React.FC<IEventProps> = ({ name, venue, date, time, alumnis }) => {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "name",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Passing year",
+        accessor: "passing_year",
+      },
+      {
+        Header: "Mobile",
+        accessor: "mobile",
+      },
+      {
+        Header: "Attended?",
+        accessor: "attended",
+      },
+    ],
+    []
+  );
+  const data = React.useMemo(
+    () =>
+      alumnis.map((alumni) => ({
+        name: alumni.name,
+        email: alumni.email,
+        passing_year: alumni.passing_year,
+        mobile: alumni.mobile,
+        attended: alumni.pivot.attended ? "Yes" : "No",
+      })),
+    []
+  );
+  // @ts-ignore
+  const tableInstance = useTable({ columns, data });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
   return (
-    <div className="px-4 max-w-5xl w-full mx-auto">
-      <div className="input-group my-5">
-        <div className="flex items-center">
+    <div className="w-full mx-auto sm:max-w-screen-md">
+      <div className="bg-white border-none rounded-lg w-full p-6 shadow-sm max-w-screen-md">
+        <div className="flex w-full justify-start items-center">
           <BackBtn href="/admin/events" />
           <h1 className="text-xl font-bold">{name}</h1>
         </div>
-        <div className="bg-white border-none rounded-lg w-full p-6 shadow-sm max-w-screen-md my-4">
-          <div className="flex flex-wrap items-start">
-            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-              <label>Venue</label>
-              <div className="w-full break-words">{venue}</div>
-            </div>
-            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-              <label>Date</label>
-              <div className="w-full break-words">{date}</div>
-            </div>
-            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-              <label>Time</label>
-              <div className="w-full break-words">{time}</div>
-            </div>
-            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-              <label>name</label>
-              <div className="w-full break-words">{name}</div>
-            </div>
+        <div className="flex flex-wrap items-start">
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>Venue</label>
+            <div className="w-full break-words">{venue}</div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>Date</label>
+            <div className="w-full break-words">{date}</div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>Time</label>
+            <div className="w-full break-words">{time}</div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>name</label>
+            <div className="w-full break-words">{name}</div>
           </div>
         </div>
-        {/* <h1 className="text-2xl mb-2 text-accent-light font-bold uppercase"> */}
-        {/*   {name} */}
-        {/* </h1> */}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <table {...getTableProps()}>
+          <thead>
+            {
+              // Loop over the header rows
+              headerGroups.map((headerGroup, i) => (
+                // Apply the header row props
+                <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+                  {
+                    // Loop over the headers in each row
+                    headerGroup.headers.map((column, i) => (
+                      // Apply the header cell props
+                      <th {...column.getHeaderProps()} key={i}>
+                        {
+                          // Render the header
+                          column.render("Header")
+                        }
+                      </th>
+                    ))
+                  }
+                </tr>
+              ))
+            }
+          </thead>
+          {/* Apply the table body props */}
+          <tbody {...getTableBodyProps()}>
+            {
+              // Loop over the table rows
+              rows.map((row, i) => {
+                // Prepare the row for display
+                prepareRow(row);
+                return (
+                  // Apply the row props
+                  <tr key={i} {...row.getRowProps()}>
+                    {
+                      // Loop over the rows cells
+                      row.cells.map((cell, index) => {
+                        // Apply the cell props
+                        return (
+                          <td {...cell.getCellProps()} key={index}>
+                            {
+                              // Render the cell contents
+                              cell.render("Cell")
+                            }
+                          </td>
+                        );
+                      })
+                    }
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   );

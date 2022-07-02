@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Event;
@@ -34,6 +35,7 @@ class EventController extends Controller
             'venue' => $event->venue,
             'date' => $event->date,
             'time' => $event->time,
+            'alumnis' => $event->alumnis,
         ]);
     }
 }

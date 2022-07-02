@@ -11,6 +11,6 @@ class Alumni extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'alumni_event', 'alumni_id', 'event_id');
+        return $this->belongsToMany(Event::class)->withPivot(['attended']);
     }
 }

@@ -24,6 +24,17 @@ export interface IEvent {
   date: string;
 }
 
+export interface IAlumni {
+  id: number;
+  name: string;
+  email: string;
+  passing_year: number;
+  mobile: string;
+  gender: "MALE" | "FEMALE";
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IPageProps extends Page<PageProps> {
   props: {
     errors: Errors & ErrorBag;

@@ -15,12 +15,12 @@ class CreateAlumniEventTable extends Migration
     {
         Schema::create('alumni_event', function (Blueprint $table) {
             $table->id();
-            $table->string('alumni_id');
+            $table->bigInteger('alumni_id')->unsigned();
             $table->foreign('alumni_id')
                 ->references('id')
                 ->on('alumnis')->onDelete('cascade');
 
-            $table->string('event_id');
+            $table->bigInteger('event_id')->unsigned();
             $table->foreign('event_id')
                 ->references('id')
                 ->on('events')->onDelete('cascade');

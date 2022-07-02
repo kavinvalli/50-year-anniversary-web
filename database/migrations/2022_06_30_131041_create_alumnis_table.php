@@ -14,7 +14,7 @@ class CreateAlumnisTable extends Migration
     public function up()
     {
         Schema::create('alumnis', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('email');
             $table->string('name');
             $table->integer('passing_year');
