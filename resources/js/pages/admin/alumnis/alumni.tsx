@@ -6,7 +6,7 @@ import { IAlumni, IEvent } from "../../../lib/types";
 import { useTable } from "react-table";
 import { Link } from "@inertiajs/inertia-react";
 
-interface IAlumniWithAttendance extends IAlumni {
+interface IEventsWithAttendance extends IEvent {
   pivot: {
     event_id: number;
     alumni_id: number;
@@ -14,17 +14,20 @@ interface IAlumniWithAttendance extends IAlumni {
   };
 }
 
-interface IEventProps extends IEvent {
-  alumnis: IAlumniWithAttendance[];
+interface IAlumniProps extends IAlumni {
+  events: IEventsWithAttendance[];
+  // qrcode: string;
 }
 
-const Event: React.FC<IEventProps> = ({
+const Event: React.FC<IAlumniProps> = ({
   id,
   name,
-  venue,
-  date,
-  time,
-  alumnis,
+  email,
+  passing_year,
+  mobile,
+  gender,
+  events,
+  // qrcode,
 }) => {
   const columns = React.useMemo(
     () => [
@@ -49,16 +52,16 @@ const Event: React.FC<IEventProps> = ({
         },
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Venue",
+        accessor: "venue",
       },
       {
-        Header: "Passing year",
-        accessor: "passing_year",
+        Header: "Date",
+        accessor: "date",
       },
       {
-        Header: "Mobile",
-        accessor: "mobile",
+        Header: "Time",
+        accessor: "time",
       },
       {
         Header: "Attended?",
@@ -88,16 +91,16 @@ const Event: React.FC<IEventProps> = ({
   );
   const data = React.useMemo(
     () =>
-      alumnis.map((alumni) => ({
-        name: `/admin/alumnis/${alumni.id}`,
-        actualName: alumni.name,
-        email: alumni.email,
-        passing_year: alumni.passing_year,
-        mobile: alumni.mobile,
-        attended: alumni.pivot.attended ? "Yes" : "No",
-        goto: `/admin/alumnis/${
-          alumni.id
-        }/events/${id}?back=${`/admin/events/${id}`}`,
+      events.map((event) => ({
+        name: `/admin/events/${event.id}`,
+        actualName: event.name,
+        venue: event.venue,
+        date: event.date,
+        time: event.time,
+        attended: event.pivot.attended ? "Yes" : "No",
+        goto: `/admin/alumnis/${id}/events/${
+          event.id
+        }?back=${`/admin/alumnis/${id}`}`,
       })),
     []
   );
@@ -108,30 +111,33 @@ const Event: React.FC<IEventProps> = ({
   return (
     <div className="w-full mx-auto sm:max-w-screen-md">
       <div className="bg-white border-none rounded-lg w-full p-6 shadow-sm max-w-screen-md">
+        {/* <div className="w-full flex justify-center"> */}
+        {/*   <img src={`data:image/png;base64, ${qrcode} `} alt="something" /> */}
+        {/* </div> */}
         <div className="flex w-full justify-start items-center">
           <BackBtn href="/admin/events" />
           <h1 className="text-xl font-bold">{name}</h1>
         </div>
         <div className="flex flex-wrap items-start">
           <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Venue</label>
-            <div className="w-full break-words">{venue}</div>
+            <label>Email</label>
+            <div className="w-full break-words">{email}</div>
           </div>
           <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Date</label>
-            <div className="w-full break-words">{date}</div>
+            <label>Passing Year</label>
+            <div className="w-full break-words">{passing_year}</div>
           </div>
           <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Time</label>
-            <div className="w-full break-words">{time}</div>
+            <label>Mobile</label>
+            <div className="w-full break-words">{mobile}</div>
           </div>
           <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>name</label>
-            <div className="w-full break-words">{name}</div>
+            <label>Gender</label>
+            <div className="w-full break-words">{gender}</div>
           </div>
         </div>
       </div>
-      <table className="w-full" {...getTableProps()}>
+      <table {...getTableProps()}>
         <thead>
           {
             // Loop over the header rows

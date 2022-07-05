@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumniController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AuthController;
@@ -47,6 +48,12 @@ Route::prefix('/admin')
     })->name('index');
 
     Route::resource('events', EventController::class);
+
+    Route::resource('alumnis', AlumniController::class);
+
+    Route::get('/alumnis/{alumni_id}/events/{event_id}', [AlumniController::class, 'alumniEvent']);
+
+    /* Route::get('/alumnis/qrcode/{alumni_id}', [AlumniController::class, 'qrcode']); */
   });
 
 if (App::environment('local')) {
