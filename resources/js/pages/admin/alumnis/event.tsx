@@ -48,7 +48,8 @@ const AlumniEvent: React.FC<IAlumniEventProps> = ({
         <div className="flex w-full justify-start items-center">
           <BackBtn href={back} />
           <h1 className="text-xl font-bold">
-            {alumni.name} - <span className="underline">{event.name}</span>
+            {alumni.name} -{" "}
+            <span className="text-accent underline">{event.name}</span>
           </h1>
         </div>
         <div className="flex flex-wrap items-start">
