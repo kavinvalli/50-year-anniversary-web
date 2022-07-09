@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dokku": {
-      "predeploy": "apt-get install imagemagick php8.1-imagick -y"
+      "predeploy": "apt-get update -y && apt-get install imagemagick php8.1-imagick -y && service apache2 reload"
     }
   }
 }
