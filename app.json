@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dokku": {
-      "predeploy": "apt-get install imagemagick php-imagick -y && service apache2 restart"
+      "predeploy": "apt-get install imagemagick php-imagick -y"
     }
   }
 }
