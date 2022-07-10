@@ -24,7 +24,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'DPS RKP - Back to School',
+                'name' => 'DPS RKP - Back to School (18th)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('18-08-2022'),
                 'time' => '4:00pm to 9:30pm',
@@ -45,7 +45,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'Cultural Extravaganza',
+                'name' => 'Cultural Extravaganza (20th)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('20-08-2022'),
                 'time' => 'Morning Evening (Slots will be intimidated later)',
@@ -59,7 +59,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'id' => 7,
-                'name' => 'Cultural Extravaganza',
+                'name' => 'Cultural Extravaganza (21st)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('21-08-2022'),
                 'time' => 'Morning Evening (Slots will be intimidated later)',

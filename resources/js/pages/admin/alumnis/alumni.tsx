@@ -11,6 +11,7 @@ interface IEventsWithAttendance extends IEvent {
     event_id: number;
     alumni_id: number;
     attended: number;
+    number_of_members: number;
   };
 }
 
@@ -68,6 +69,10 @@ const Event: React.FC<IAlumniProps> = ({
         accessor: "attended",
       },
       {
+        Header: "Number of Members",
+        accessor: "number_of_members",
+      },
+      {
         Header: "Go to?",
         accessor: "goto",
         Cell: ({
@@ -98,6 +103,7 @@ const Event: React.FC<IAlumniProps> = ({
         date: event.date,
         time: event.time,
         attended: event.pivot.attended ? "Yes" : "No",
+        number_of_members: event.pivot.number_of_members,
         goto: `/admin/alumnis/${id}/events/${
           event.id
         }?back=${`/admin/alumnis/${id}`}`,

@@ -19,7 +19,7 @@ class CreateAlumnisTable extends Migration
             $table->string('name');
             $table->integer('passing_year');
             $table->string('mobile');
-            $table->enum('gender', ['MALE', 'FEMALE']);
+            $table->enum('gender', ['MALE', 'FEMALE'])->nullable();
             $table->timestamps();
         });
     }
