@@ -14,7 +14,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,json}\""
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-react": "^7.18.6",
     "@types/react": "^17.0.39",
     "@types/react-table": "^7.7.12",
     "@types/styled-components": "^5.1.21",
