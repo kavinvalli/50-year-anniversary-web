@@ -37,6 +37,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@awesomeqr/react": "^0.1.2-rc.0",
     "@inertiajs/inertia": "^0.11.0",
     "@inertiajs/inertia-react": "^0.8.0",
     "@inertiajs/progress": "^0.2.7",

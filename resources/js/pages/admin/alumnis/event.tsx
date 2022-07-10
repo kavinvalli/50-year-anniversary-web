@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BackBtn from "../../../components/BackBtn";
 import Layout from "../../../components/Layout";
 // import Table from "../../../components/Table";
 import { IAlumni, IEvent } from "../../../lib/types";
+
+import { AwesomeQRCode } from "@awesomeqr/react";
 
 interface IEventsWithAttendance extends IEvent {
   pivot: {
@@ -32,6 +34,16 @@ interface IAlumniEventProps {
   back: string;
 }
 
+export const fsImageAsDataURI = async (path: string) => {
+  const blob = await fetch(path).then((res) => res.blob());
+  const reader = new FileReader();
+  return await new Promise<string>((resolve, reject) => {
+    reader.onerror = reject;
+    reader.onload = () => resolve(reader.result as string);
+    return reader.readAsDataURL(blob);
+  });
+};
+
 const AlumniEvent: React.FC<IAlumniEventProps> = ({
   alumni,
   event,
@@ -39,11 +51,31 @@ const AlumniEvent: React.FC<IAlumniEventProps> = ({
   qrcode,
   back,
 }) => {
+  const [logoImage, setLogoImage] = useState<string>();
+
+  useEffect(() => {
+    (async () => setLogoImage(await fsImageAsDataURI("/img/logo.png")))();
+  }, []);
   return (
     <div className="w-full mx-auto sm:max-w-screen-md">
       <div className="bg-white border-none rounded-lg w-full p-6 shadow-sm max-w-screen-md">
         <div className="w-full flex justify-center">
-          <img src={`data:image/png;base64, ${qrcode} `} alt="something" />
+          {/* <div style={{ width: 350, height: 350 }}> */}
+          {/*   {logoImage && ( */}
+          {/*     <AwesomeQRCode */}
+          {/*       options={{ */}
+          {/*         text: JSON.stringify({ */}
+          {/*           ...alumni, */}
+          {/*           event_id: event.id, */}
+          {/*         }), */}
+          {/*         size: 350, */}
+          {/*         correctLevel: 3, */}
+          {/*       }} */}
+          {/*     /> */}
+          {/*   )} */}
+          {/* </div> */}
+          <div dangerouslySetInnerHTML={{ __html: qrcode }}></div>
+          {/* <img src={`data:image/png;base64, ${qrcode} `} alt="something" /> */}
         </div>
         <div className="flex w-full justify-start items-center">
           <BackBtn href={back} />

@@ -52,7 +52,15 @@ class AlumniController extends Controller
         $alumni = Alumni::find($alumni_id);
         $event = Event::find($event_id);
         $alumni_event = $alumni->events->where('id', $event_id)->first();
-        $image = QrCode::size(150)->format('png')->errorCorrection('H')->merge(env('APP_URL') . '/img/logo.png', .5, true)->gradient(0, 0, 0, 190, 148, 74, 'radial')->generate(json_encode([
+        /* $image = QrCode::size(150)->format('png')->errorCorrection('H')->merge(env('APP_URL') . '/img/logo.png', .5, true)->gradient(0, 0, 0, 190, 148, 74, 'radial')->generate(json_encode([ */
+        /*     'id' => $alumni->id, */
+        /*     'name' => $alumni->name, */
+        /*     'passing_year' => $alumni->passing_year, */
+        /*     'gender' => $alumni->gender, */
+        /*     'mobile' => $alumni->mobile, */
+        /*     'event_id' => $event->id, */
+        /* ])); */
+        $image = QrCode::size(200)->gradient(0, 0, 0, 190, 148, 74, 'radial')->generate(json_encode([
             'id' => $alumni->id,
             'name' => $alumni->name,
             'passing_year' => $alumni->passing_year,
@@ -65,7 +73,7 @@ class AlumniController extends Controller
             'event' => $event,
             'alumni_event' => $alumni_event,
             'back' => $request->query('back') ? $request->query('back') : '/admin/events',
-            'qrcode' => base64_encode($image),
+            'qrcode' => $image->toHTML(),
         ]);
     }
 

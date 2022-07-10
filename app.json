@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "dokku": {
-      "predeploy": "apt-get install imagemagick php-imagick -y"
-    }
-  }
-}
