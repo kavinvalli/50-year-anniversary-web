@@ -60,7 +60,8 @@ class AlumniController extends Controller
         /*     'mobile' => $alumni->mobile, */
         /*     'event_id' => $event->id, */
         /* ])); */
-        $image = QrCode::size(200)->gradient(0, 0, 0, 190, 148, 74, 'radial')->generate(json_encode([
+        /* $image = QrCode::size(200)->gradient(0, 0, 0, 190, 148, 74, 'radial')->generate(json_encode([ */
+        $image = QrCode::size(200)->color(90, 90, 90)->generate(json_encode([
             'id' => $alumni->id,
             'name' => $alumni->name,
             'passing_year' => $alumni->passing_year,
