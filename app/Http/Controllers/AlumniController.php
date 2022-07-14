@@ -102,4 +102,24 @@ class AlumniController extends Controller
             ]);
         }
     }
+
+    public function changeNumberOfMembers(Request $request)
+    {
+        $event_id = $request->input("eventId");
+        $alumni_id = $request->input("alumniId");
+        $number_of_members = $request->input("number_of_members");
+
+        try {
+            DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['number_of_members_final' => $number_of_members]);
+            return response()->json([
+                'success' => true,
+                'message' => ''
+            ]);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => $err->getMessage(),
+            ]);
+        }
+    }
 }

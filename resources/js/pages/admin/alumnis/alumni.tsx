@@ -13,6 +13,7 @@ interface IEventsWithAttendance extends IEvent {
     attended: number;
     attended_timestamp: string;
     number_of_members: number;
+    number_of_members_final: number;
   };
 }
 
@@ -110,6 +111,7 @@ const Event: React.FC<IAlumniProps> = ({
         attended: event.pivot.attended ? "Yes" : "No",
         attended_timestamp: event.pivot.attended_timestamp,
         number_of_members: event.pivot.number_of_members,
+        number_of_members_final: event.pivot.number_of_members_final,
         goto: `/admin/alumnis/${id}/events/${
           event.id
         }?back=${`/admin/alumnis/${id}`}`,

@@ -69,7 +69,7 @@ class AlumniSeeder extends Seeder
                 } else {
                     $number_of_members = $row[9];
                 }
-                $alumni->events()->attach($event, ['number_of_members' => $number_of_members]);
+                $alumni->events()->attach($event, ['number_of_members' => $number_of_members, 'number_of_members_final' => $number_of_members]);
             }
         }
     }

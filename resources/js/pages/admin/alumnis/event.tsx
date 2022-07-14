@@ -32,6 +32,7 @@ interface IAlumniEventProps {
       attended: boolean;
       number_of_members: number;
       attended_timestamp: string;
+      number_of_members_final: number;
     };
   };
   qrcode: string;
@@ -105,6 +106,12 @@ const AlumniEvent: React.FC<IAlumniEventProps> = ({
             <label>Number of Members</label>
             <div className="w-full break-words">
               {alumni_event.pivot.number_of_members}
+            </div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>Number of Members Final</label>
+            <div className="w-full break-words">
+              {alumni_event.pivot.number_of_members_final}
             </div>
           </div>
         </div>
