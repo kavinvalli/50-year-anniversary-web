@@ -36,6 +36,7 @@ class EventController extends Controller
             'date' => $event->date,
             'time' => $event->time,
             'alumnis' => $event->alumnis,
+            'number_of_alumnis' => $event->alumnis->count(),
         ]);
     }
 }

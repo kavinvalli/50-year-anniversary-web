@@ -7,6 +7,7 @@ import { useTable } from "react-table";
 import { Link } from "@inertiajs/inertia-react";
 
 interface IAlumniWithAttendance extends IAlumni {
+  number_of_alumnis: number;
   pivot: {
     event_id: number;
     alumni_id: number;
@@ -28,6 +29,7 @@ const Event: React.FC<IEventProps> = ({
   date,
   time,
   alumnis,
+  number_of_alumnis,
 }) => {
   const columns = React.useMemo(
     () => [
@@ -144,8 +146,28 @@ const Event: React.FC<IEventProps> = ({
             <div className="w-full break-words">{time}</div>
           </div>
           <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>name</label>
-            <div className="w-full break-words">{name}</div>
+            <label>Number of Alumnis</label>
+            <div className="w-full break-words">{number_of_alumnis}</div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>
+              Number of People (alumnis + number of people with them)
+            </label>
+            <div className="w-full break-words">
+              {alumnis
+                .map((alumni) => alumni.pivot.number_of_members)
+                .reduce((a, b) => a + b, 0)}
+            </div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>
+              Number of People Final (alumnis + number of people with them)
+            </label>
+            <div className="w-full break-words">
+              {alumnis
+                .map((alumni) => alumni.pivot.number_of_members_final)
+                .reduce((a, b) => a + b, 0)}
+            </div>
           </div>
         </div>
       </div>
