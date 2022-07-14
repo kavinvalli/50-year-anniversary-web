@@ -11,6 +11,7 @@ interface IEventsWithAttendance extends IEvent {
     event_id: number;
     alumni_id: number;
     attended: number;
+    attended_timestamp: string;
   };
 }
 
@@ -19,6 +20,7 @@ interface IAlumniWithAttendance extends IAlumni {
     event_id: number;
     alumni_id: number;
     attended: number;
+    attended_timestamp: string;
   };
 }
 
@@ -29,6 +31,7 @@ interface IAlumniEventProps {
     pivot: {
       attended: boolean;
       number_of_members: number;
+      attended_timestamp: string;
     };
   };
   qrcode: string;
@@ -90,6 +93,12 @@ const AlumniEvent: React.FC<IAlumniEventProps> = ({
             <label>Attended?</label>
             <div className="w-full break-words">
               {alumni_event.pivot.attended ? "Yes" : "No"}
+            </div>
+          </div>
+          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+            <label>Attended Time</label>
+            <div className="w-full break-words">
+              {alumni_event.pivot.attended_timestamp}
             </div>
           </div>
           <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">

@@ -11,6 +11,6 @@ class Event extends Model
 
     public function alumnis()
     {
-        return $this->belongsToMany(Alumni::class)->withPivot(['attended', 'number_of_members']);
+        return $this->belongsToMany(Alumni::class)->withPivot(['attended', 'attended_timestamp', 'number_of_members']);
     }
 }

@@ -90,7 +90,7 @@ class AlumniController extends Controller
         $alumni_id = $request->input("alumniId");
 
         try {
-            DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['attended' => true]);
+            DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['attended' => true, 'attended_timestamp' => now()]);
             return response()->json([
                 'success' => true,
                 'message' => ''

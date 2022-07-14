@@ -11,6 +11,7 @@ interface IAlumniWithAttendance extends IAlumni {
     event_id: number;
     alumni_id: number;
     attended: number;
+    attended_timestamp: string;
     number_of_members: number;
   };
 }
@@ -66,6 +67,10 @@ const Event: React.FC<IEventProps> = ({
         accessor: "attended",
       },
       {
+        Header: "Attended Time",
+        accessor: "attended_timestamp",
+      },
+      {
         Header: "Number of Members",
         accessor: "number_of_members",
       },
@@ -100,6 +105,7 @@ const Event: React.FC<IEventProps> = ({
         passing_year: alumni.passing_year,
         mobile: alumni.mobile,
         attended: alumni.pivot.attended ? "Yes" : "No",
+        attended_timestamp: alumni.pivot.attended_timestamp,
         number_of_members: alumni.pivot.number_of_members,
         goto: `/admin/alumnis/${
           alumni.id
