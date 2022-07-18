@@ -7,7 +7,6 @@ import { useTable } from "react-table";
 import { Link } from "@inertiajs/inertia-react";
 
 interface IAlumniWithAttendance extends IAlumni {
-  number_of_alumnis: number;
   pivot: {
     event_id: number;
     alumni_id: number;
@@ -20,6 +19,7 @@ interface IAlumniWithAttendance extends IAlumni {
 
 interface IEventProps extends IEvent {
   alumnis: IAlumniWithAttendance[];
+  number_of_alumnis: number;
 }
 
 const Event: React.FC<IEventProps> = ({
