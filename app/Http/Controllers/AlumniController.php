@@ -67,7 +67,7 @@ class AlumniController extends Controller
             'passing_year' => $alumni->passing_year,
             'gender' => $alumni->gender,
             'mobile' => $alumni->mobile,
-            'number_of_members' => $alumni_event->pivot->number_of_members,
+            'number_of_members' => $alumni_event->pivot->number_of_members_final,
             'event_id' => $event->id,
         ]));
         return Inertia::render('admin/alumnis/event', [
