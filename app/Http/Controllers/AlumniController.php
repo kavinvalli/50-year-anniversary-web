@@ -7,6 +7,7 @@ use App\Models\Event;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -101,6 +102,59 @@ class AlumniController extends Controller
                 'message' => $err->getMessage(),
             ]);
         }
+    }
+
+    public function enter_attend_code()
+    {
+        return Inertia::render('admin/attend_code');
+    }
+
+    public function attend_code(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|size:5',
+        ]);
+        $code = $request->get("code");
+        $event_id = (int)$code[0];
+        $alumni_id = (int)mb_substr($code, 1);
+
+        $itemExists = DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->first();
+        if ($itemExists) {
+            try {
+                DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['attended' => true, 'attended_timestamp' => now()]);
+                return Redirect::to('/admin/attend-code');
+            } catch (Exception $err) {
+                return Inertia::render('admin/attend_code', ['error' => $err->getMessage()]);
+            }
+        }
+        return Inertia::render('admin/attend_code', ['error' => 'Wrong Code']);
+    }
+
+    function attend_code_api(Request $request)
+    {
+        $code = $request->input("code");
+        $event_id = (int)$code[0];
+        $alumni_id = (int)mb_substr($code, 1);
+        $itemExists = DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->first();
+        if ($itemExists) {
+            try {
+                DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['attended' => true, 'attended_timestamp' => now()]);
+                return Redirect::to('/admin/attend-code');
+                return response()->json([
+                    'success' => true,
+                    'message' => ''
+                ]);
+            } catch (Exception $err) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $err->getMessage(),
+                ]);
+            }
+        }
+        return response()->json([
+            'success' => false,
+            'message' => "Wrong Code",
+        ]);
     }
 
     public function changeNumberOfMembers(Request $request)

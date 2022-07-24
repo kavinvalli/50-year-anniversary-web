@@ -51,6 +51,9 @@ Route::prefix('/admin')
 
     Route::resource('alumnis', AlumniController::class);
 
+    Route::get('/attend-code', [AlumniController::class, 'enter_attend_code']);
+    Route::post('/attend-code', [AlumniController::class, 'attend_code']);
+
     Route::get('/alumnis/{alumni_id}/events/{event_id}', [AlumniController::class, 'alumniEvent']);
 
     /* Route::get('/alumnis/qrcode/{alumni_id}', [AlumniController::class, 'qrcode']); */
