@@ -7,6 +7,7 @@ use App\Models\Event;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -130,7 +131,7 @@ class AlumniController extends Controller
         return Inertia::render('admin/attend_code', ['error' => 'Wrong Code']);
     }
 
-    function attend_code_api(Request $request)
+    public function attend_code_api(Request $request)
     {
         $code = $request->input("code");
         $event_id = (int)$code[0];
@@ -139,7 +140,6 @@ class AlumniController extends Controller
         if ($itemExists) {
             try {
                 DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['attended' => true, 'attended_timestamp' => now()]);
-                return Redirect::to('/admin/attend-code');
                 return response()->json([
                     'success' => true,
                     'message' => ''
