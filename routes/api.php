@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/has-attended', [AlumniController::class, 'has_attended']);
 Route::post('/attend', [AlumniController::class, 'attend']);
 Route::post('/attend-code', [AlumniController::class, 'attend_code_api']);
 Route::post('/change-number-of-members', [AlumniController::class, 'changeNumberOfMembers']);

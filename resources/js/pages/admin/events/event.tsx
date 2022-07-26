@@ -70,6 +70,10 @@ const Event: React.FC<IEventProps> = ({
         accessor: "attended",
       },
       {
+        Header: "Code",
+        accessor: "code",
+      },
+      {
         Header: "Attended Time",
         accessor: "attended_timestamp",
       },
@@ -112,6 +116,7 @@ const Event: React.FC<IEventProps> = ({
         passing_year: alumni.passing_year,
         mobile: alumni.mobile,
         attended: alumni.pivot.attended ? "Yes" : "No",
+        code: `${id}${alumni.id.toString().padStart(4, "0")}`,
         attended_timestamp: alumni.pivot.attended_timestamp,
         number_of_members: alumni.pivot.number_of_members,
         number_of_members_final: alumni.pivot.number_of_members_final,
@@ -126,47 +131,49 @@ const Event: React.FC<IEventProps> = ({
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
   return (
-    <div className="w-full mx-auto sm:max-w-screen-md">
-      <div className="bg-white border-none rounded-lg w-full p-6 shadow-sm max-w-screen-md">
-        <div className="flex w-full justify-start items-center">
-          <BackBtn href="/admin/events" />
-          <h1 className="text-xl font-bold">{name}</h1>
-        </div>
-        <div className="flex flex-wrap items-start">
-          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Venue</label>
-            <div className="w-full break-words">{venue}</div>
+    <>
+      <div className="w-full mx-auto sm:max-w-screen-md">
+        <div className="bg-white border-none rounded-lg w-full p-6 shadow-sm max-w-screen-md">
+          <div className="flex w-full justify-start items-center">
+            <BackBtn href="/admin/events" />
+            <h1 className="text-xl font-bold">{name}</h1>
           </div>
-          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Date</label>
-            <div className="w-full break-words">{date}</div>
-          </div>
-          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Time</label>
-            <div className="w-full break-words">{time}</div>
-          </div>
-          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>Number of Alumnis</label>
-            <div className="w-full break-words">{number_of_alumnis}</div>
-          </div>
-          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>
-              Number of People (alumnis + number of people with them)
-            </label>
-            <div className="w-full break-words">
-              {alumnis
-                .map((alumni) => alumni.pivot.number_of_members)
-                .reduce((a, b) => a + b, 0)}
+          <div className="flex flex-wrap items-start">
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>Venue</label>
+              <div className="w-full break-words">{venue}</div>
             </div>
-          </div>
-          <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
-            <label>
-              Number of People Final (alumnis + number of people with them)
-            </label>
-            <div className="w-full break-words">
-              {alumnis
-                .map((alumni) => alumni.pivot.number_of_members_final)
-                .reduce((a, b) => a + b, 0)}
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>Date</label>
+              <div className="w-full break-words">{date}</div>
+            </div>
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>Time</label>
+              <div className="w-full break-words">{time}</div>
+            </div>
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>Number of Alumnis</label>
+              <div className="w-full break-words">{number_of_alumnis}</div>
+            </div>
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>
+                Number of People (alumnis + number of people with them)
+              </label>
+              <div className="w-full break-words">
+                {alumnis
+                  .map((alumni) => alumni.pivot.number_of_members)
+                  .reduce((a, b) => a + b, 0)}
+              </div>
+            </div>
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>
+                Number of People Final (alumnis + number of people with them)
+              </label>
+              <div className="w-full break-words">
+                {alumnis
+                  .map((alumni) => alumni.pivot.number_of_members_final)
+                  .reduce((a, b) => a + b, 0)}
+              </div>
             </div>
           </div>
         </div>
@@ -224,7 +231,7 @@ const Event: React.FC<IEventProps> = ({
           }
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

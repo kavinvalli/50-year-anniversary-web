@@ -7,7 +7,6 @@ use App\Models\Event;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -131,25 +130,40 @@ class AlumniController extends Controller
         return Inertia::render('admin/attend_code', ['error' => 'Wrong Code']);
     }
 
+    public function has_attended(Request $request)
+    {
+        $event_id = $request->input("eventId");
+        $alumni_id = $request->input("alumniId");
+        $alumni = Alumni::find($alumni_id);
+        $alumni_event = $alumni->events->where('id', $event_id)->first();
+        return response()->json([
+            'success' => true,
+            'attended' => $alumni_event->pivot->attended,
+            'message' => ''
+        ]);
+    }
+
     public function attend_code_api(Request $request)
     {
         $code = $request->input("code");
         $event_id = (int)$code[0];
         $alumni_id = (int)mb_substr($code, 1);
-        $itemExists = DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->first();
-        if ($itemExists) {
-            try {
-                DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->update(['attended' => true, 'attended_timestamp' => now()]);
-                return response()->json([
-                    'success' => true,
-                    'message' => ''
-                ]);
-            } catch (Exception $err) {
-                return response()->json([
-                    'success' => false,
-                    'message' => $err->getMessage(),
-                ]);
-            }
+        $user = DB::table('alumni_event')->where('event_id', $event_id)->where('alumni_id', $alumni_id)->first();
+        if ($user) {
+            $alumni = Alumni::find($alumni_id);
+            $event = Event::find($event_id);
+            return response()->json([
+                'success' => true,
+                'id' => $alumni->id,
+                'name' => $alumni->name,
+                'passing_year' => $alumni->passing_year,
+                'gender' => $alumni->gender,
+                'mobile' => $alumni->mobile,
+                'number_of_members' => $alumni->events->where('id', $event_id)->first()->pivot->number_of_members_final,
+                'attended' => $alumni->events->where('id', $event_id)->first()->pivot->attended,
+                'event_id' => $event->id,
+                'message' => '',
+            ]);
         }
         return response()->json([
             'success' => false,
