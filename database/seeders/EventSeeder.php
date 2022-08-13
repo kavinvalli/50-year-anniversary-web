@@ -20,7 +20,7 @@ class EventSeeder extends Seeder
                 'name' => 'DPS RKP Golf',
                 'venue' => 'Qutab Golf Club, Lado Sarai, New Delhi',
                 'date' => date_create('18-08-2022'),
-                'time' => 'Morning',
+                'time' => '7:00AM',
             ],
             [
                 'id' => 2,
@@ -34,7 +34,7 @@ class EventSeeder extends Seeder
                 'name' => 'The Great DPS RKP Run (TGD Run)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('19-08-2022'),
-                'time' => 'Morning',
+                'time' => '5:45AM',
             ],
             [
                 'id' => 4,
@@ -48,21 +48,21 @@ class EventSeeder extends Seeder
                 'name' => 'Cultural Extravaganza (20th)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('20-08-2022'),
-                'time' => 'Morning Evening (Slots will be intimidated later)',
+                'time' => '6:00PM',
             ],
             [
                 'id' => 6,
                 'name' => 'DPS RKP Alumni Dinner',
                 'venue' => 'Khubani, Hotel Andaz, Aerocity, New Delhi',
                 'date' => date_create('20-08-2022'),
-                'time' => 'Late Evening',
+                'time' => '9:00PM',
             ],
             [
                 'id' => 7,
                 'name' => 'Cultural Extravaganza (21st)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('21-08-2022'),
-                'time' => 'Morning Evening (Slots will be intimidated later)',
+                'time' => '6:00PM',
             ],
         ];
 
