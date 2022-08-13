@@ -19,7 +19,7 @@ class AlumniSeeder extends Seeder
     public function run()
     {
         $sheetURLS = [
-            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS2gOWJvB8vAX_KDT1yqdCtPrOVyYbuRJqBvaNpopaal7GJa3HRgMisq0gmycIIojSZ5Xhh8gpSgaJ/pub?gid=22177327&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS2gOWJvB8vAX_KDT1yqdCtPrOVyYbuRJqBvaNpopaal7GJa3HRgMisq0gmycIIojSZ5Xhh8gpSgaJ/pub?gid=1365779210&single=true&output=tsv',
             'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1705908244&single=true&output=tsv',
             'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTDGjhZIrksNshu3HXy82GDPswM5iZzi_IdcQ0wzOrHQKJEOBVoHVpjs2hVGBLUOHDhFvM1-Q7FDVy/pub?gid=1215260649&single=true&output=tsv',
             'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1674780203&single=true&output=tsv',
