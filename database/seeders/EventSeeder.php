@@ -46,7 +46,7 @@ class EventSeeder extends Seeder
             [
                 'id' => 5,
                 'name' => 'Cultural Extravaganza (20th)',
-                'venue' => 'Delhi Public School, R.K. Puram',
+                'venue' => 'Siri Fort Auditorium',
                 'date' => date_create('20-08-2022'),
                 'time' => '6:00PM',
             ],
@@ -60,7 +60,7 @@ class EventSeeder extends Seeder
             [
                 'id' => 7,
                 'name' => 'Cultural Extravaganza (21st)',
-                'venue' => 'Delhi Public School, R.K. Puram',
+                'venue' => 'Siri Fort Auditorium',
                 'date' => date_create('21-08-2022'),
                 'time' => '6:00PM',
             ],
