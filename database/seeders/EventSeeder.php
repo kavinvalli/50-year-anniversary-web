@@ -31,17 +31,17 @@ class EventSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'The Great DPS RKP Run (TGD Run)',
-                'venue' => 'Delhi Public School, R.K. Puram',
-                'date' => date_create('19-08-2022'),
-                'time' => '5:45AM',
-            ],
-            [
-                'id' => 4,
                 'name' => 'DPS RKP - Back to School (19th)',
                 'venue' => 'Delhi Public School, R.K. Puram',
                 'date' => date_create('19-08-2022'),
                 'time' => '4:00pm to 9:30pm',
+            ],
+            [
+                'id' => 4,
+                'name' => 'The Great DPS RKP Run (TGD Run)',
+                'venue' => 'Delhi Public School, R.K. Puram',
+                'date' => date_create('19-08-2022'),
+                'time' => '5:45AM',
             ],
             [
                 'id' => 5,
@@ -52,17 +52,17 @@ class EventSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'name' => 'DPS RKP Alumni Dinner',
-                'venue' => 'Khubani, Hotel Andaz, Aerocity, New Delhi',
-                'date' => date_create('20-08-2022'),
-                'time' => '9:00PM',
-            ],
-            [
-                'id' => 7,
                 'name' => 'Cultural Extravaganza (21st)',
                 'venue' => 'Siri Fort Auditorium',
                 'date' => date_create('21-08-2022'),
                 'time' => '6:00PM',
+            ],
+            [
+                'id' => 7,
+                'name' => 'DPS RKP Alumni Dinner',
+                'venue' => 'Khubani, Hotel Andaz, Aerocity, New Delhi',
+                'date' => date_create('20-08-2022'),
+                'time' => '9:00PM',
             ],
         ];
 
