@@ -34,6 +34,14 @@ const Event: React.FC<IEventProps> = ({
   const columns = React.useMemo(
     () => [
       {
+        Header: "SNo.",
+        accessor: "sno",
+      },
+      {
+        Header: "Code",
+        accessor: "code",
+      },
+      {
         Header: "Name",
         accessor: "name",
         Cell: ({
@@ -53,14 +61,14 @@ const Event: React.FC<IEventProps> = ({
           );
         },
       },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Passing year",
-        accessor: "passing_year",
-      },
+      // {
+      //   Header: "Email",
+      //   accessor: "email",
+      // },
+      // {
+      //   Header: "Passing year",
+      //   accessor: "passing_year",
+      // },
       {
         Header: "Mobile",
         accessor: "mobile",
@@ -68,10 +76,6 @@ const Event: React.FC<IEventProps> = ({
       {
         Header: "Attended?",
         accessor: "attended",
-      },
-      {
-        Header: "Code",
-        accessor: "code",
       },
       {
         Header: "Attended Time",
@@ -97,11 +101,7 @@ const Event: React.FC<IEventProps> = ({
             };
           };
         }) => {
-          return (
-            <Link className="button" href={row.original.goto}>
-              Go
-            </Link>
-          );
+          return <Link href={row.original.goto}>Go</Link>;
         },
       },
     ],
@@ -109,7 +109,9 @@ const Event: React.FC<IEventProps> = ({
   );
   const data = React.useMemo(
     () =>
-      alumnis.map((alumni) => ({
+      alumnis.map((alumni, index) => ({
+        sno: index + 1,
+        id: alumni.id,
         name: `/admin/alumnis/${alumni.id}`,
         actualName: alumni.name,
         email: alumni.email,
@@ -117,9 +119,13 @@ const Event: React.FC<IEventProps> = ({
         mobile: alumni.mobile,
         attended: alumni.pivot.attended ? "Yes" : "No",
         code: `${id}${alumni.id.toString().padStart(4, "0")}`,
-        attended_timestamp: alumni.pivot.attended_timestamp,
+        attended_timestamp: alumni.pivot.attended_timestamp ?? "-",
         number_of_members: alumni.pivot.number_of_members,
-        number_of_members_final: alumni.pivot.number_of_members_final,
+        number_of_members_final:
+          alumni.pivot.number_of_members_final ===
+          alumni.pivot.number_of_members
+            ? "-"
+            : alumni.pivot.number_of_members_final,
         goto: `/admin/alumnis/${
           alumni.id
         }/events/${id}?back=${`/admin/events/${id}`}`,
@@ -178,59 +184,73 @@ const Event: React.FC<IEventProps> = ({
           </div>
         </div>
       </div>
-      <table className="w-full" {...getTableProps()}>
-        <thead>
-          {
-            // Loop over the header rows
-            headerGroups.map((headerGroup, i) => (
-              // Apply the header row props
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map((column, i) => (
-                    // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
-                      {
-                        // Render the header
-                        column.render("Header")
-                      }
-                    </th>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </thead>
-        {/* Apply the table body props */}
-        <tbody {...getTableBodyProps()}>
-          {
-            // Loop over the table rows
-            rows.map((row, i) => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr {...row.getRowProps()}>
+      <div className="shadow overflow-auto border-b border-gray-200 sm:rounded-lg mt-4">
+        <table
+          {...getTableProps()}
+          className="min-w-full divide-y divide-gray-200"
+        >
+          <thead>
+            {
+              // Loop over the header rows
+              headerGroups.map((headerGroup, i) => (
+                // Apply the header row props
+                <tr {...headerGroup.getHeaderGroupProps()}>
                   {
-                    // Loop over the rows cells
-                    row.cells.map((cell, index) => {
-                      // Apply the cell props
-                      return (
-                        <td {...cell.getCellProps()}>
-                          {
-                            // Render the cell contents
-                            cell.render("Cell")
-                          }
-                        </td>
-                      );
-                    })
+                    // Loop over the headers in each row
+                    headerGroup.headers.map((column, i) => (
+                      // Apply the header cell props
+                      <th
+                        {...column.getHeaderProps()}
+                        className="group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        {
+                          // Render the header
+                          column.render("Header")
+                        }
+                      </th>
+                    ))
                   }
                 </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
+              ))
+            }
+          </thead>
+          {/* Apply the table body props */}
+          <tbody
+            {...getTableBodyProps()}
+            className="bg-white divide-y divide-gray-200"
+          >
+            {
+              // Loop over the table rows
+              rows.map((row, i) => {
+                // Prepare the row for display
+                prepareRow(row);
+                return (
+                  // Apply the row props
+                  <tr {...row.getRowProps()}>
+                    {
+                      // Loop over the rows cells
+                      row.cells.map((cell, index) => {
+                        // Apply the cell props
+                        return (
+                          <td
+                            {...cell.getCellProps()}
+                            className="px-6 whitespace-nowrap"
+                          >
+                            {
+                              // Render the cell contents
+                              cell.render("Cell")
+                            }
+                          </td>
+                        );
+                      })
+                    }
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

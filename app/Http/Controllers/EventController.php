@@ -14,11 +14,18 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('admin/events/index', [
-            'events' => Event::all(),
-        ]);
+        if (auth()->check()) {
+            if (auth()->user()->email === "golf@dpsrkp.net") {
+                return Inertia::render('admin/events/index', [
+                    'events' => Event::where('id', 1)->get(),
+                ]);
+            }
+            return Inertia::render('admin/events/index', [
+                'events' => Event::all(),
+            ]);
+        }
     }
 
     /*
@@ -29,14 +36,21 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return Inertia::render('admin/events/event', [
-            'id' => $event->id,
-            'name' => $event->name,
-            'venue' => $event->venue,
-            'date' => $event->date,
-            'time' => $event->time,
-            'alumnis' => $event->alumnis,
-            'number_of_alumnis' => $event->alumnis->count(),
-        ]);
+        if (auth()->check()) {
+            if (auth()->user()->email === "golf@dpsrkp.net") {
+                if ($event->id !== 1) {
+                    return redirect("/admin/events/1");
+                }
+            }
+            return Inertia::render('admin/events/event', [
+                'id' => $event->id,
+                'name' => $event->name,
+                'venue' => $event->venue,
+                'date' => $event->date,
+                'time' => $event->time,
+                'alumnis' => $event->alumnis,
+                'number_of_alumnis' => $event->alumnis->count(),
+            ]);
+        }
     }
 }

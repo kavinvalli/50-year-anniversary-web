@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
       'email' => 'admin@dpsrkp.net',
       'password' => Hash::make('dpsrkp50y3@r'),
     ]))->save();
+    (new \App\Models\User([
+      'name' => 'DPS RKP Golf',
+      'email' => 'golf@dpsrkp.net',
+      'password' => Hash::make('Golf@DPSRKP'),
+    ]))->save();
     $this->call([
       EventSeeder::class,
     ]);
