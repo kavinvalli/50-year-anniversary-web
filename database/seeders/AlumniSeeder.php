@@ -19,19 +19,26 @@ class AlumniSeeder extends Seeder
     public function run()
     {
         $sheetURLS = [
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS2gOWJvB8vAX_KDT1yqdCtPrOVyYbuRJqBvaNpopaal7GJa3HRgMisq0gmycIIojSZ5Xhh8gpSgaJ/pub?gid=1365779210&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=2087093845&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1374751234&single=true&output=tsv', */
-            '',
-            '',
-            '',
-            'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTDGjhZIrksNshu3HXy82GDPswM5iZzi_IdcQ0wzOrHQKJEOBVoHVpjs2hVGBLUOHDhFvM1-Q7FDVy/pub?gid=192630303&single=true&output=tsv'
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1705908244&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTDGjhZIrksNshu3HXy82GDPswM5iZzi_IdcQ0wzOrHQKJEOBVoHVpjs2hVGBLUOHDhFvM1-Q7FDVy/pub?gid=1215260649&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1674780203&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdMm6Mddg1G1VieAj91JJjJGEfyzQec6qG5hReNkkCxNCGW9-WqQlL6rFistEFH4TH7Jj2NzBjzb-l/pub?gid=827809265&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3WANw_kFDMyHHbEoUMPd8vyw0KnUsyFSS3JDi-N2fA8LVR6yK8O9MG9nLfni1Yy7JyROonpMyP9vz/pub?gid=96638908&single=true&output=tsv', */
-            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdMm6Mddg1G1VieAj91JJjJGEfyzQec6qG5hReNkkCxNCGW9-WqQlL6rFistEFH4TH7Jj2NzBjzb-l/pub?gid=694575293&single=true&output=tsv', */
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS2gOWJvB8vAX_KDT1yqdCtPrOVyYbuRJqBvaNpopaal7GJa3HRgMisq0gmycIIojSZ5Xhh8gpSgaJ/pub?gid=1365779210&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=2087093845&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1374751234&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTDGjhZIrksNshu3HXy82GDPswM5iZzi_IdcQ0wzOrHQKJEOBVoHVpjs2hVGBLUOHDhFvM1-Q7FDVy/pub?gid=192630303&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdMm6Mddg1G1VieAj91JJjJGEfyzQec6qG5hReNkkCxNCGW9-WqQlL6rFistEFH4TH7Jj2NzBjzb-l/pub?gid=705584592&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdMm6Mddg1G1VieAj91JJjJGEfyzQec6qG5hReNkkCxNCGW9-WqQlL6rFistEFH4TH7Jj2NzBjzb-l/pub?gid=1689169713&single=true&output=tsv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3WANw_kFDMyHHbEoUMPd8vyw0KnUsyFSS3JDi-N2fA8LVR6yK8O9MG9nLfni1Yy7JyROonpMyP9vz/pub?gid=1117835398&single=true&output=tsv',
+            /* '', */
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=2134372180&single=true&output=tsv', */ // back to school 18 - new
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1915410863&single=true&output=tsv', // back to school 18 - new new */
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNWbi0rM3KCTtvQ4gYxuG7B6aeeY1eMdlcyAkcfIauC4-umIFQt9SHwDBH8bzg16vtkgD9T3YSfzo/pub?gid=1369261963&single=true&output=tsv' */ // back to school 19 - new
+            /* '', */
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTDGjhZIrksNshu3HXy82GDPswM5iZzi_IdcQ0wzOrHQKJEOBVoHVpjs2hVGBLUOHDhFvM1-Q7FDVy/pub?gid=591788661&single=true&output=tsv', // tgd - new */
+            /* '', */
+            /* '', */
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdMm6Mddg1G1VieAj91JJjJGEfyzQec6qG5hReNkkCxNCGW9-WqQlL6rFistEFH4TH7Jj2NzBjzb-l/pub?gid=303522068&single=true&output=tsv', */ // cultural extravaganza 20 - new
+            /* '', */
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdMm6Mddg1G1VieAj91JJjJGEfyzQec6qG5hReNkkCxNCGW9-WqQlL6rFistEFH4TH7Jj2NzBjzb-l/pub?gid=2086275448&single=true&output=tsv' // cultural extravaganza 21 - new */
+            /* 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3WANw_kFDMyHHbEoUMPd8vyw0KnUsyFSS3JDi-N2fA8LVR6yK8O9MG9nLfni1Yy7JyROonpMyP9vz/pub?gid=710189331&single=true&output=tsv', // dinner - new */
+            /* '' */
         ];
         for ($i = 0; $i < count($sheetURLS); $i++) {
             Log::info("At sheet " . $i);
@@ -49,7 +56,7 @@ class AlumniSeeder extends Seeder
                         'created_at' => $now,
                         'updated_at' => $now,
                     ];
-                    if ($i != 5) {
+                    if ($i != 6) {
                         $args['gender'] = $row[6];
                     }
                     $alumni = Alumni::firstOrCreate(
@@ -64,8 +71,8 @@ class AlumniSeeder extends Seeder
                         }
                     } else if ($i == 3) {
                         $number_of_members = 1;
-                    } else if ($i == 5) {
-                        $number_of_members = $row[14];
+                    } else if ($i == 6) {
+                        $number_of_members = $row[10];
                     } else {
                         $number_of_members = $row[9];
                     }
