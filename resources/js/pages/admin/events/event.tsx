@@ -20,6 +20,7 @@ interface IAlumniWithAttendance extends IAlumni {
 interface IEventProps extends IEvent {
   alumnis: IAlumniWithAttendance[];
   number_of_alumnis: number;
+  number_of_alumnis_attended: number;
 }
 
 const Event: React.FC<IEventProps> = ({
@@ -30,6 +31,7 @@ const Event: React.FC<IEventProps> = ({
   time,
   alumnis,
   number_of_alumnis,
+  number_of_alumnis_attended,
 }) => {
   const columns = React.useMemo(
     () => [
@@ -177,6 +179,21 @@ const Event: React.FC<IEventProps> = ({
               </label>
               <div className="w-full break-words">
                 {alumnis
+                  .map((alumni) => alumni.pivot.number_of_members_final)
+                  .reduce((a, b) => a + b, 0)}
+              </div>
+            </div>
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>Number of Alumnis Attended</label>
+              <div className="w-full break-words">
+                {alumnis.filter((alumni) => alumni.pivot.attended).length}
+              </div>
+            </div>
+            <div className="input-group my-3 px-0 sm:odd-pr-3 sm:even:pl-3 w-full sm:w-1/2">
+              <label>Number of Alumnis (with other people) Attended</label>
+              <div className="w-full break-words">
+                {alumnis
+                  .filter((alumni) => alumni.pivot.attended)
                   .map((alumni) => alumni.pivot.number_of_members_final)
                   .reduce((a, b) => a + b, 0)}
               </div>
